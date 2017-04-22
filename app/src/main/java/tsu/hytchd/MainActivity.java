@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.example.mapwithmarker.R;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                                 password.getText().toString().equals("admin")) {
                             Toast.makeText(getApplicationContext(),
                                     "Connected! Redirecting...",Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent("tsu.hytchd.add_org_n_dest");
+                            startActivity(i);
                         }else{
                             Toast.makeText(getApplicationContext(), "Please enter a correct login.",
                                     Toast.LENGTH_SHORT).show();
