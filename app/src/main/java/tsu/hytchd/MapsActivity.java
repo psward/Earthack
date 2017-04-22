@@ -61,6 +61,10 @@ public class MapsActivity extends AppCompatActivity
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
+        mMap.clear();
+        mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(location.getLatitude(), location.getLongitude()), 16));
     }
 
     @Override
@@ -90,7 +94,6 @@ public class MapsActivity extends AppCompatActivity
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         mMap.clear();
-
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16));
