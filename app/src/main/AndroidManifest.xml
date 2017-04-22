@@ -40,7 +40,15 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".add_org_n_dest">
+            android:label="add_org_n_dest">
+            <intent-filter>
+                <action android:name="tsu.hytchd.add_org_n_dest" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
