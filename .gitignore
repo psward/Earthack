@@ -1,6 +1,7 @@
 local.properties
-build/
-.idea/
+/build/
+/.idea/
+/.gradle/
 *.class
 
 # Mobile Tools for Java (J2ME)
