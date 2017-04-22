@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +20,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button loginButton = (Button) findViewById(R.id.login_button);
+        final EditText email = (EditText)findViewById(R.id.email);
+        final EditText password = (EditText)findViewById(R.id.password);
+
+        loginButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(email.getText().toString().equals("admin") &&
+                                password.getText().toString().equals("admin")) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Connected! Redirecting...",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Please enter a correct login.",
+                                    Toast.LENGTH_SHORT).show();
+                            //tx1.setVisibility(View.VISIBLE);
+                            //tx1.setBackgroundColor(Color.RED);
+                            //counter--;
+                            //tx1.setText(Integer.toString(counter));
+
+                            //if (counter == 0) {
+                            //    b1.setEnabled(false);
+                            //}
+                        }
+                    }
+                }
+        );
 
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,4 +80,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

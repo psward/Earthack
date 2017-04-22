@@ -39,9 +39,9 @@ public class PathJSONParser {
                         for (int l = 0; l < list.size(); l++) {
                             HashMap<String, String> hm = new HashMap<String, String>();
                             hm.put("lat",
-                                    Double.toString(((LatLng) list.get(l)).latitude));
+                                    Double.toString(list.get(l).latitude));
                             hm.put("lng",
-                                    Double.toString(((LatLng) list.get(l)).longitude));
+                                    Double.toString(list.get(l).longitude));
                             path.add(hm);
                         }
                     }
