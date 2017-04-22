@@ -9,6 +9,7 @@
     tools:showIn="@layout/activity_main"
     tools:context="tsu.hytchd.MainActivity">
 
+        <!--Page 1 -->
 
     <EditText
         android:id="@+id/editText2"
