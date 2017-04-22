@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mapwithmarker.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
