@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:weightSum="1"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    tools:context="tsu.hytchd.select_driver">
 
     <FrameLayout
         android:layout_width="345dp"
