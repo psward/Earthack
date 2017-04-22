@@ -7,30 +7,20 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.Manifest;
-        import android.content.pm.PackageManager;
-        import android.os.Bundle;
-        import android.support.annotation.NonNull;
-        import android.support.v4.app.ActivityCompat;
-        import android.support.v4.content.ContextCompat;
-        import android.support.v7.app.AppCompatActivity;
-        import android.widget.Toast;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import static tsu.hytchd.R.id.map;
 
-
-/**
- * This demo shows how GMS Location can be used to check for changes to the users location.  The
- * "My Location" button uses GMS Location to set the blue dot representing the users location.
- * Permission for {@link android.Manifest.permission#ACCESS_FINE_LOCATION} is requested at run
- * time. If the permission has not been granted, the Activity is finished with an error message.
- */
 public class MapsActivity extends AppCompatActivity
         implements
         OnMyLocationButtonClickListener,
@@ -69,7 +59,6 @@ public class MapsActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
     }
