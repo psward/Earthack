@@ -3,174 +3,39 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\e547681ae0d9b7da905cfddd4f81f49483ec5d4d\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a35c7162a9f11f91eb499076b1aeb386a93c435b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\5ad29e264c227467e71219f50d4ec7b9409c1db7\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5697c8dc04d5c0dd971a3c34f7539d862fd6b159\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\583074b73ae19251fe31597fcad9e4194c634229\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dc59d350f2b19fca474cd2b52b3f8641eea8c879\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\662c14a83f717bb9974f194333f83027fded93a9\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9fa74ebf515fbe50a7cda5428941985ce699ae9d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\9268a9eb125ddffa7c407a2bbec1a8f1ef0ac050\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6d81e1589958470db9c4e614caac67abe1837754\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\Desktop\Earthack\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_8b9d80d326564b6d25091f4cab262f90889e9229\classes.dex" />
+        <dex dex="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_be9323a82699e53efe7e850f23a8a41cf4178176\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Hajjhajj\.android\build-cache\8e4f5b01f2261bd65854696a667229e081b7769f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\pre-dexed\debug\classes_217249ec2932cab0a7e804d0493508ab635c79e0.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\prest\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jar="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_f9c12273a20c5ea653b20896dcc477b1179750ee\classes.dex" />
+        sha1="7fbe4886ae8626fa8d981a82c5954589d3b98e21">
+        <dex dex="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_00e21699befb898e78d9efc38637479bf6e60eeb\classes.dex" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\14952372b3bd480aaf08a07f9f0fbb17120031f9\output\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\Hajjhajj\.android\build-cache\1a05f0ac1e412330002c8b6345d1bf46e45ccc77\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="cb6fab7a71fa9ec1f483d44c5fca65ab469d8aca">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_69f291022cd51172f698317c1961b3390a36c9dc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\f7657cf0400437be5e4ac1b8b5d234a1af93c3cd\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_25b949461499b43deb2928a3a2767fb29e0af3e5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\4084883588e5a828326bcb3172b8b8463daadb23\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_481a312986e4666db766a5ca40d37e04402e034f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\5a0e7076bc1ece353eaee72e9efd283c6b1fb4e0\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_41b247a0088e9f4404e234942f434497ec3537a0\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\9dd1266c83b977a266ada0e3beaa5e1d24a9d57b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a84396cf2830050dfcf413b171f6af65eeb313a1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\94f143387d811ef9072d5ba5b6829fc5457af482\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_247a462522bce8412acdf4b7e98ef4cc280a4323\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\7aaacf7c8d6629073624e481b1637486c9fc155b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_03ba980bd227933f22d4f5c24f12f326ae44d6c1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\122cb732688aa9772e391b4c3207df7a0253feb8\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_832375bf8305fcb8802eae0cc58d518f2dd83c86\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_f9a4c40a524adca9083e8f7a00e3c49aa9ee9cf3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\3af20da597aefea19a6ed6ff4c0c08d12e45fdd3\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f19328e3a7c064fe3f7156ac649e06f0b92c9106\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\.android\build-cache\3c4fe9b469f8c09c7243522c782fa7b435733ed7\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a9a8d85e5aa376a00e1f528ae92c19d99457faa3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\prest\Desktop\Earthack\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f80b02c077c10b6fa8a056686a7fcea008759a00">
-        <dex dex="C:\Users\prest\Desktop\Earthack\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_886bc69b6368a4d7700db619f90a68ceb8c3728d\classes.dex" />
+        <dex dex="C:\Users\Hajjhajj\Documents\GitHub\Earthack\app\build\intermediates\pre-dexed\debug\classes_840dddd54afc356227e626954324260b107d214c.jar" />
     </item>
 
 </items>
