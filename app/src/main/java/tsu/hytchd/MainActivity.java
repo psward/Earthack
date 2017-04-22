@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                         if(email.getText().toString().equals("admin") &&
                                 password.getText().toString().equals("admin")) {
                             Toast.makeText(getApplicationContext(),
-                                    "Connected! Redirecting...",Toast.LENGTH_SHORT).show();
+                                    "Connected!",Toast.LENGTH_SHORT).show();
                             Intent i = new Intent("tsu.hytchd.add_org_n_dest");
                             startActivity(i);
                         }else{
