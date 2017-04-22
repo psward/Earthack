@@ -4,7 +4,6 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.example.mapwithmarker.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
         import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -23,7 +22,8 @@ import android.Manifest;
         import android.support.v7.app.AppCompatActivity;
         import android.widget.Toast;
 
-import static com.example.mapwithmarker.R.id.map;
+import static tsu.hytchd.R.id.map;
+
 
 /**
  * This demo shows how GMS Location can be used to check for changes to the users location.  The
@@ -61,11 +61,10 @@ public class MapsActivity extends AppCompatActivity
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
-        mMap.clear();
+
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(location.getLatitude(), location.getLongitude()), 16));
-    }
+
+        }
 
     @Override
     public void onMapReady(GoogleMap map) {
