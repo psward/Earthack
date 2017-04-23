@@ -39,9 +39,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -365,8 +368,9 @@ public class add_org_n_dest extends AppCompatActivity
         StringBuffer buffer=null;
         try {
             URL url = new URL(urlString);
-
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            reader = new BufferedReader(new InputStreamReader(in));
             buffer = new StringBuffer();
             int read;
             char[] chars = new char[1024];
