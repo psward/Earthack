@@ -1,12 +1,20 @@
 package tsu.hytchd;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,19 +28,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
 
 import static tsu.hytchd.R.id.map;
+import static tsu.hytchd.R.layout.activity_add_org_n_dest;
+
 public class add_org_n_dest extends AppCompatActivity
         implements
         OnMyLocationButtonClickListener,
@@ -60,7 +63,7 @@ public class add_org_n_dest extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_org_n_dest);
+        setContentView(activity_add_org_n_dest);
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
@@ -70,19 +73,29 @@ public class add_org_n_dest extends AppCompatActivity
 
         Button addRoute = (Button) findViewById(R.id.add_route_button);
 
-
         addRoute.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         EditText locationSearch = (EditText) findViewById(R.id.destination_input);
                         String location = locationSearch.getText().toString();
-                        Toast.makeText(getApplicationContext(), location, Toast.LENGTH_SHORT).show();
-                        onMapSearch(location);
+                        if (location != null && !location.equals("")) {
+                            onMapSearch(location);
+                        } else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(add_org_n_dest.this).create();
+                            alertDialog.setTitle("Alert");
+                            alertDialog.setMessage("Please enter your desired destination.");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
                     }
                 }
         );
-
     }
 
     @Override
@@ -164,20 +177,17 @@ public class add_org_n_dest extends AppCompatActivity
     public void onMapSearch(String location) {
         mMap.clear();
         List<Address>addressList = null;
+        Geocoder geocoder = new Geocoder(this);
+        try {
+            addressList = geocoder.getFromLocationName(location, 1);
 
-        if (location != null || !location.equals("")) {
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                addressList = geocoder.getFromLocationName(location, 1);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Address address = addressList.get(0);
+        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
 }
