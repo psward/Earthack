@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -72,6 +73,7 @@ public class add_org_n_dest extends AppCompatActivity
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
 
         Button addRoute = (Button) findViewById(R.id.add_route_button);
+        Button confirmRoute = (Button) findViewById(R.id.confirm_button);
 
         addRoute.setOnClickListener(
                 new View.OnClickListener() {
@@ -81,6 +83,7 @@ public class add_org_n_dest extends AppCompatActivity
                         String location = locationSearch.getText().toString();
                         if (location != null && !location.isEmpty()) {
                             onMapSearch(location);
+                            //make confirm button appear here
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(add_org_n_dest.this).create();
                             alertDialog.setTitle("Alert");
@@ -96,6 +99,15 @@ public class add_org_n_dest extends AppCompatActivity
                     }
                 }
         );
+
+        confirmRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //make button appear if addRoute clicked and location valid
+                Intent i = new Intent("tsu.hytchd.activity_selection_menu");
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -180,7 +192,6 @@ public class add_org_n_dest extends AppCompatActivity
         Geocoder geocoder = new Geocoder(this);
         try {
             addressList = geocoder.getFromLocationName(location, 1);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
