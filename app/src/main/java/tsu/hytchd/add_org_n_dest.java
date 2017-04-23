@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +29,20 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.*;
 import java.util.List;
+
+
 
 import static tsu.hytchd.R.id.map;
 
@@ -167,14 +178,16 @@ public class add_org_n_dest extends AppCompatActivity
         mMap.clear();
         List<Address>addressList = null;
 
-        if (location != null || !location.equals("")) {
+        if (location != null && !location.equals("")) {
             Geocoder geocoder = new Geocoder(this);
             try {
                 addressList = geocoder.getFromLocationName(location, 1);
+                drawDirections("https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood4&key=AIzaSyDb498hSFJucJIlAs9SsgMbV1G4eEvHKAM");
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
@@ -182,4 +195,75 @@ public class add_org_n_dest extends AppCompatActivity
         }
     }
 
+    public String drawDirections(String mapsApiDirectionsUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        java.net.HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(mapsApiDirectionsUrl);
+            urlConnection = (java.net.HttpURLConnection) url.openConnection();
+            urlConnection.connect();
+            iStream = urlConnection.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    iStream));
+            StringBuffer sb = new StringBuffer();
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            data = sb.toString();
+            br.close();
+        } catch (Exception e) {
+            Log.d("Exception reading url", e.toString());
+        } finally {
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        Toast.makeText(getApplicationContext(),
+                data,Toast.LENGTH_SHORT).show();
+        return data;
+    }
+
+
+    public void dDirections(String apiRequest) {
+        try{
+            StringBuffer
+        URL url = new URL(stringUrl);
+        HttpURLConnection httpconn = (HttpURLConnection)url.openConnection();
+        if (httpconn.getResponseCode() == HttpURLConnection.HTTP_OK)
+        {
+            BufferedReader input = new BufferedReader(new InputStreamReader(httpconn.getInputStream()),8192);
+            String strLine = null;
+            while ((strLine = input.readLine()) != null)
+            {
+                response.append(strLine);
+            }
+            input.close();
+        }
+        String apiOutput = response.toString();
+            JSONObject jsonObject = new JSONObject(apiOutput);
+            // routesArray contains ALL routes
+            JSONArray routesArray = jsonObject.getJSONArray("routes");
+            for(int i=0;i<routesArray.length();i++){
+                JSONObject route = routesArray.getJSONObject(i);
+                for(int j=0;j<route.length();j++){
+                    // Take all legs from the route
+                    JSONArray legs = route.getJSONArray("legs");
+                    for(int k=0;k<legs.length();k++){
+                        // Grab first leg
+                        JSONObject leg = legs.getJSONObject(k);
+                        JSONObject durationObject = leg.getJSONObject("duration");
+                        String duration = "value: "+durationObject.getString("value");
+                        Toast.makeText(getApplicationContext(),
+                                duration,Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+        } catch (IOException ie){
+            ie.printStackTrace();
+        } catch (JSONException je){
+            je.printStackTrace();
+        }
+    }
 }
