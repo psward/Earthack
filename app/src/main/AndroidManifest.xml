@@ -56,7 +56,16 @@ package="tsu.hytchd">
     <activity android:name=".add_org_n_dest">
         android:label="add_org_n_dest">
         <intent-filter>
-            <action android:name="tsu.hytchd.add_org_n_dest" />
+            <action android:name="tsu.hytchd.activity_add_org_n_dest" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+
+    <activity android:name=".selection_menu">
+        android:label="add_org_n_dest">
+        <intent-filter>
+            <action android:name="tsu.hytchd.activity_selection_menu" />
 
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
