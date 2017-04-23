@@ -79,7 +79,7 @@ public class add_org_n_dest extends AppCompatActivity
                     public void onClick(View v) {
                         EditText locationSearch = (EditText) findViewById(R.id.destination_input);
                         String location = locationSearch.getText().toString();
-                        if (location != null && !location.equals("")) {
+                        if (location != null && !location.isEmpty()) {
                             onMapSearch(location);
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(add_org_n_dest.this).create();
