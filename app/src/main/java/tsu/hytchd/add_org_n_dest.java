@@ -72,18 +72,27 @@ public class add_org_n_dest extends AppCompatActivity
 
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
 
-        Button addRoute = (Button) findViewById(R.id.add_route_button);
-        Button confirmRoute = (Button) findViewById(R.id.confirm_button);
+        final EditText locationSearch = (EditText) findViewById(R.id.destination_input);
+        final Button addRoute = (Button) findViewById(R.id.add_route_button);
+        final Button confirmRoute = (Button) findViewById(R.id.confirm_button);
+        final Button editRoute = (Button) findViewById(R.id.edit_button);
+        final Button saveRoute = (Button) findViewById(R.id.save_button);
+        //button UI
+        confirmRoute.setVisibility(View.INVISIBLE);
+        editRoute.setVisibility(View.INVISIBLE);
+        saveRoute.setVisibility(View.INVISIBLE);
 
         addRoute.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditText locationSearch = (EditText) findViewById(R.id.destination_input);
                         String location = locationSearch.getText().toString();
                         if (location != null && !location.isEmpty()) {
                             onMapSearch(location);
-                            //make confirm button appear here
+                            locationSearch.setFocusable(false);
+                            confirmRoute.setVisibility(View.VISIBLE);
+                            editRoute.setVisibility(View.VISIBLE);
+                            addRoute.setVisibility(View.INVISIBLE);
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(add_org_n_dest.this).create();
                             alertDialog.setTitle("Alert");
@@ -100,10 +109,48 @@ public class add_org_n_dest extends AppCompatActivity
                 }
         );
 
+        editRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationSearch.setFocusableInTouchMode(true);
+                editRoute.setVisibility(View.INVISIBLE);
+                confirmRoute.setVisibility(View.INVISIBLE);
+                saveRoute.setVisibility(View.VISIBLE);
+            }
+        });
+
+        saveRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationSearch.setFocusableInTouchMode(false);
+                saveRoute.setVisibility(View.INVISIBLE);
+                editRoute.setVisibility(View.VISIBLE);
+                confirmRoute.setVisibility(View.VISIBLE);
+                String location = locationSearch.getText().toString();
+                if (location != null && !location.isEmpty()) {
+                    onMapSearch(location);
+                    locationSearch.setFocusable(false);
+                    confirmRoute.setVisibility(View.VISIBLE);
+                    editRoute.setVisibility(View.VISIBLE);
+                    addRoute.setVisibility(View.INVISIBLE);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(add_org_n_dest.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Please enter your desired destination.");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+            }
+        });
+
         confirmRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //make button appear if addRoute clicked and location valid
                 Intent i = new Intent("tsu.hytchd.activity_selection_menu");
                 startActivity(i);
             }
