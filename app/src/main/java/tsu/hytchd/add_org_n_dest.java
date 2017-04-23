@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -16,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -29,10 +31,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static tsu.hytchd.R.id.map;
@@ -88,9 +96,12 @@ public class add_org_n_dest extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
                         hideVirtualKeyboard();
-                        String location = locationSearch.getText().toString();
-                        if (location != null && !location.isEmpty()) {
-                            onMapSearch(location);
+                        String loc = locationSearch.getText().toString();
+                        if (loc != null && !loc.isEmpty()) {
+                            LatLng ll = onMapSearch(loc);
+                            String url = makeURL(location.getLatitude(), location.getLongitude(), ll.latitude, ll.longitude);
+                            drawPath(url);
+
                             locationSearch.setFocusable(false);
                             confirmRoute.setVisibility(View.VISIBLE);
                             editRoute.setVisibility(View.VISIBLE);
@@ -251,7 +262,7 @@ public class add_org_n_dest extends AppCompatActivity
         return (StringUtils.isNotBlank(provider) &&
                 !LocationManager.PASSIVE_PROVIDER.equals(provider));
     }
-    public void onMapSearch(String location) {
+    public LatLng onMapSearch(String location) {
         mMap.clear();
         List<Address>addressList = null;
         Geocoder geocoder = new Geocoder(this);
@@ -264,6 +275,97 @@ public class add_org_n_dest extends AppCompatActivity
         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
         mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        return latLng;
     }
+    public void drawPath(String result){
+        try {
+            final JSONObject jsonObject = new JSONObject(result);
+
+            JSONArray routeArray = jsonObject.getJSONArray("routes");
+            JSONObject routes = routeArray.getJSONObject(0);
+
+
+            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+            String encodedString = overviewPolylines.getString("points");
+
+            String statusString = jsonObject.getString("status");
+
+            Log.d("test: ", encodedString);
+            List<LatLng> list = decodePoly(encodedString);
+
+            LatLng last = null;
+            for (int i = 0; i < list.size()-1; i++) {
+                LatLng src = list.get(i);
+                LatLng dest = list.get(i+1);
+                last = dest;
+                Log.d("Last latLng:", last.latitude + ", " + last.longitude );
+                Polyline line = mMap.addPolyline(new PolylineOptions()
+                        .add(new LatLng(src.latitude, src.longitude), new LatLng(dest.latitude, dest.longitude))
+                        .width(4)
+                        .color(Color.GREEN));
+            }
+
+            Log.d("Last latLng:", last.latitude + ", " + last.longitude );
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.err.println("Caught ArrayIndexOutOfBoundsException: "+ e.getMessage());
+        }
+    }
+
+    private List<LatLng> decodePoly(String encoded){
+
+
+        List<LatLng> poly = new ArrayList<LatLng>();
+        int index = 0;
+        int length = encoded.length();
+
+        int latitude = 0;
+        int longitude = 0;
+
+        while(index < length){
+            int b;
+            int shift = 0;
+            int result = 0;
+
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+
+            int destLat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            latitude += destLat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b > 0x20);
+
+            int destLong = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            longitude += destLong;
+
+            poly.add(new LatLng((latitude / 1E5),(longitude / 1E5) ));
+        }
+        return poly;
+    }
+    public String makeURL (double sourcelat, double sourcelog, double destlat, double destlog ){
+        StringBuilder urlString = new StringBuilder();
+        urlString.append("http://maps.googleapis.com/maps/api/directions/json");
+        urlString.append("?origin=");//
+        urlString.append(Double.toString(sourcelat));
+        urlString.append(",");
+        urlString.append(Double.toString( sourcelog));
+        urlString.append("&destination=");
+        urlString .append(Double.toString( destlat));
+        urlString.append(",");
+        urlString.append(Double.toString( destlog));
+        urlString.append("&sensor=false&mode=driving&alternatives=true");
+        urlString.append("&key=AIzaSyDb498hSFJucJIlAs9SsgMbV1G4eEvHKAM");
+        return urlString.toString(); }
 
 }
