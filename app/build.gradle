@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "tsu.hytchd"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -30,5 +30,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:10.2.1'
     compile 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.google.android.gms:play-services-places:10.2.1'
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile group: 'com.google.code.geocoder-java', name: 'geocoder-java', version: '0.15'
     testCompile 'junit:junit:4.12'
 }

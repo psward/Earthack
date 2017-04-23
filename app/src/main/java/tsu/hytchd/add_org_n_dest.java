@@ -1,13 +1,15 @@
 package tsu.hytchd;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Context;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
-import android.os.Bundle;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,8 +20,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import static tsu.hytchd.R.id.map;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.IOException;
+import java.util.List;
+
+import static tsu.hytchd.R.id.map;
 public class add_org_n_dest extends AppCompatActivity
         implements
         OnMyLocationButtonClickListener,
@@ -42,6 +55,8 @@ public class add_org_n_dest extends AppCompatActivity
     MarkerOptions mp = new MarkerOptions();
     private GoogleMap mMap;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +67,21 @@ public class add_org_n_dest extends AppCompatActivity
         mapFragment.getMapAsync(this);
 
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
+
+        Button addRoute = (Button) findViewById(R.id.add_route_button);
+
+
+        addRoute.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText locationSearch = (EditText) findViewById(R.id.destination_input);
+                        String location = locationSearch.getText().toString();
+                        Toast.makeText(getApplicationContext(), location, Toast.LENGTH_SHORT).show();
+                        onMapSearch(location);
+                    }
+                }
+        );
 
     }
 
@@ -71,7 +101,7 @@ public class add_org_n_dest extends AppCompatActivity
             // Permission to access the location is missing.
             PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
                     Manifest.permission.ACCESS_FINE_LOCATION, true);
-        } else if (mMap != null) {
+        } else if (mMap != null  && isLocationServiceEnabled()) {
             mMap.setMyLocationEnabled(true);
             mMap.clear();
         }
@@ -80,7 +110,6 @@ public class add_org_n_dest extends AppCompatActivity
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        mMap.clear();
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16));
@@ -123,6 +152,32 @@ public class add_org_n_dest extends AppCompatActivity
     private void showMissingPermissionError() {
         PermissionUtils.PermissionDeniedDialog
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
+    }
+
+    public boolean isLocationServiceEnabled() {
+        LocationManager lm = (LocationManager)
+                this.getSystemService(Context.LOCATION_SERVICE);
+        String provider = lm.getBestProvider(new Criteria(), true);
+        return (StringUtils.isNotBlank(provider) &&
+                !LocationManager.PASSIVE_PROVIDER.equals(provider));
+    }
+    public void onMapSearch(String location) {
+        mMap.clear();
+        List<Address>addressList = null;
+
+        if (location != null || !location.equals("")) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
     }
 
 }
