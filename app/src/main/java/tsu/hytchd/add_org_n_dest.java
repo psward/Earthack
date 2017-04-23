@@ -77,7 +77,10 @@ public class add_org_n_dest extends AppCompatActivity
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onMapSearch(v);
+                        EditText locationSearch = (EditText) findViewById(R.id.editText4);
+                        String location = locationSearch.getText().toString();
+                        Toast.makeText(getApplicationContext(), location, Toast.LENGTH_SHORT).show();
+                        onMapSearch(location);
                     }
                 }
         );
@@ -109,7 +112,6 @@ public class add_org_n_dest extends AppCompatActivity
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        mMap.clear();
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16));
@@ -161,9 +163,8 @@ public class add_org_n_dest extends AppCompatActivity
         return (StringUtils.isNotBlank(provider) &&
                 !LocationManager.PASSIVE_PROVIDER.equals(provider));
     }
-    public void onMapSearch(View view) {
-        EditText locationSearch = (EditText) findViewById(R.id.textView4);
-        String location = locationSearch.getText().toString();
+    public void onMapSearch(String location) {
+        mMap.clear();
         List<Address>addressList = null;
 
         if (location != null || !location.equals("")) {
