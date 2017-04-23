@@ -8,6 +8,6 @@ public class available_drivers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_org_n_dest);
+        setContentView(R.layout.activity_add_org_n_dest);
     }
 }

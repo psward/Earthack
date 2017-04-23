@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                                 password.getText().toString().equals("admin")) {
                             Toast.makeText(getApplicationContext(),
                                     "Connected!",Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent("tsu.hytchd.add_org_n_dest");
+                            Intent i = new Intent("tsu.hytchd.activity_add_org_n_dest");
                             startActivity(i);
                         }else{
                             Toast.makeText(getApplicationContext(), "Please enter a correct login.",
