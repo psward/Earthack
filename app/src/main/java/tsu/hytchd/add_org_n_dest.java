@@ -39,7 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +93,7 @@ public class add_org_n_dest extends AppCompatActivity
         confirmRoute.setVisibility(View.INVISIBLE);
         editRoute.setVisibility(View.INVISIBLE);
         saveRoute.setVisibility(View.INVISIBLE);
-
+//ADD ROUTE
         addRoute.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -141,9 +144,11 @@ public class add_org_n_dest extends AppCompatActivity
                 saveRoute.setVisibility(View.INVISIBLE);
                 editRoute.setVisibility(View.VISIBLE);
                 confirmRoute.setVisibility(View.VISIBLE);
-                String location = locationSearch.getText().toString();
-                if (location != null && !location.isEmpty()) {
-                    onMapSearch(location);
+                String loc = locationSearch.getText().toString();
+                if (loc != null && !loc.isEmpty()) {
+                    LatLng ll = onMapSearch(loc);
+                    String url = makeURL(location.getLatitude(), location.getLongitude(), ll.latitude, ll.longitude);
+                    drawPath(readUrl(url));
                     locationSearch.setFocusable(false);
                     confirmRoute.setVisibility(View.VISIBLE);
                     editRoute.setVisibility(View.VISIBLE);
@@ -262,6 +267,7 @@ public class add_org_n_dest extends AppCompatActivity
         return (StringUtils.isNotBlank(provider) &&
                 !LocationManager.PASSIVE_PROVIDER.equals(provider));
     }
+
     public LatLng onMapSearch(String location) {
         mMap.clear();
         List<Address>addressList = null;
@@ -353,18 +359,40 @@ public class add_org_n_dest extends AppCompatActivity
         }
         return poly;
     }
+
+    private static String readUrl(String urlString) {
+        BufferedReader reader = null;
+        StringBuffer buffer=null;
+        try {
+            URL url = new URL(urlString);
+
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1)
+            {buffer.append(chars, 0, read);}
+            reader.close();
+        } catch(IOException ie) {
+            ie.printStackTrace();
+        }
+        return buffer.toString();
+    }
+
     public String makeURL (double sourcelat, double sourcelog, double destlat, double destlog ){
         StringBuilder urlString = new StringBuilder();
-        urlString.append("http://maps.googleapis.com/maps/api/directions/json");
+        urlString.append("https://maps.googleapis.com/maps/api/directions/json");
         urlString.append("?origin=");//
-        urlString.append(Double.toString(sourcelat));
+    //    urlString.append(Double.toString(sourcelat));
+        urlString.append(30.7766642);
         urlString.append(",");
-        urlString.append(Double.toString( sourcelog));
+    //    urlString.append(Double.toString( sourcelog));
+        urlString.append(-122.7969879);
         urlString.append("&destination=");
         urlString .append(Double.toString( destlat));
         urlString.append(",");
         urlString.append(Double.toString( destlog));
-        urlString.append("&sensor=false&mode=driving&alternatives=true");
+    //    urlString.append("&sensor=false&mode=driving&alternatives=false");
         urlString.append("&key=AIzaSyDb498hSFJucJIlAs9SsgMbV1G4eEvHKAM");
         return urlString.toString(); }
 
