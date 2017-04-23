@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -86,6 +87,7 @@ public class add_org_n_dest extends AppCompatActivity
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        hideVirtualKeyboard();
                         String location = locationSearch.getText().toString();
                         if (location != null && !location.isEmpty()) {
                             onMapSearch(location);
@@ -112,6 +114,7 @@ public class add_org_n_dest extends AppCompatActivity
         editRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showVirtualKeyboard();
                 locationSearch.setFocusableInTouchMode(true);
                 editRoute.setVisibility(View.INVISIBLE);
                 confirmRoute.setVisibility(View.INVISIBLE);
@@ -122,6 +125,7 @@ public class add_org_n_dest extends AppCompatActivity
         saveRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideVirtualKeyboard();
                 locationSearch.setFocusableInTouchMode(false);
                 saveRoute.setVisibility(View.INVISIBLE);
                 editRoute.setVisibility(View.VISIBLE);
@@ -188,6 +192,20 @@ public class add_org_n_dest extends AppCompatActivity
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
+    }
+
+    public void hideVirtualKeyboard() {
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    public void showVirtualKeyboard() {
+        EditText locationSearch = (EditText) findViewById(R.id.destination_input);
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(locationSearch, InputMethodManager.SHOW_IMPLICIT);
     }
 
 
