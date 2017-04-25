@@ -73,7 +73,7 @@ public class add_org_n_dest extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_org_n_dest);
+        setContentView(R.layout.activity_add_org_n_dest);
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
@@ -81,14 +81,14 @@ public class add_org_n_dest extends AppCompatActivity
 
         mp.position(new LatLng(location.getLatitude(), location.getLongitude()));
 
-        Button addRoute = (Button) findViewById(R.id.button2);
+        Button addRoute = (Button) findViewById(R.id.add_route_button);
 
 
         addRoute.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditText locationSearch = (EditText) findViewById(R.id.editText4);
+                        EditText locationSearch = (EditText) findViewById(R.id.destination_input);
                         String location = locationSearch.getText().toString();
                         Toast.makeText(getApplicationContext(), location, Toast.LENGTH_SHORT).show();
                         onMapSearch(location);
