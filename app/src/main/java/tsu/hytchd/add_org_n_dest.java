@@ -224,14 +224,14 @@ public class add_org_n_dest extends AppCompatActivity
         return data;
     }
 
-
+/*
     public void dDirections(String apiRequest) {
         try{
-            StringBuffer
-        URL url = new URL(stringUrl);
-        HttpURLConnection httpconn = (HttpURLConnection)url.openConnection();
-        if (httpconn.getResponseCode() == HttpURLConnection.HTTP_OK)
-        {
+            StringBuffer response = new StringBuffer();
+            URL url = new URL(stringUrl);
+            HttpURLConnection httpconn = (HttpURLConnection)url.openConnection();
+            if (httpconn.getResponseCode() == HttpURLConnection.HTTP_OK)
+            {
             BufferedReader input = new BufferedReader(new InputStreamReader(httpconn.getInputStream()),8192);
             String strLine = null;
             while ((strLine = input.readLine()) != null)
@@ -239,8 +239,8 @@ public class add_org_n_dest extends AppCompatActivity
                 response.append(strLine);
             }
             input.close();
-        }
-        String apiOutput = response.toString();
+            }
+            String apiOutput = response.toString();
             JSONObject jsonObject = new JSONObject(apiOutput);
             // routesArray contains ALL routes
             JSONArray routesArray = jsonObject.getJSONArray("routes");
@@ -265,5 +265,5 @@ public class add_org_n_dest extends AppCompatActivity
         } catch (JSONException je){
             je.printStackTrace();
         }
-    }
+    }*/
 }
